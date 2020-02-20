@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
+import "./Chat.css";
+import Infobar from "../Infobar/Infobar";
+import Input from "../Input/Input";
+import Messages from "../Messages/Messages";
 
 let socket;
 
-const Chat = ({location}) => {
+const Chat = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [message, setMessage] = useState("");
@@ -20,64 +24,56 @@ const Chat = ({location}) => {
     setName(name);
     setRoom(room);
 
-
-    socket.emit("join", { name, room }, (error) => {
-        if(error){
-            alert(error);
-        }
+    socket.emit("join", { name, room }, error => {
+      if (error) {
+        alert(error);
+      }
     });
 
-    console.log("TCL: Chat -> socket", socket);
-
-    
-  }, [URL,location.search]);
+    // console.log("TCL: Chat -> socket", socket);
+  }, [URL, location.search]);
 
   useEffect(() => {
-
     console.log("useefect called");
-    
-    console.log(socket);
-    
-    socket.on('message', (message) => {
-      setMessages([...messages, message ]);
-    },[]);
 
-    // socket.on('roomData', ({ users }) => {
-    //   setUsers(users);
-    // })
+    // console.log(socket);
+
+    socket.on("message", message => {
+      setMessages([...messages, message]);
+    });
 
     return () => {
-      socket.emit('disconnect');
+      socket.emit("disconnect");
 
       socket.off();
-    }
-  })
+    };
+  }, [messages]);
 
   //function for sending messages
-  const sendMessages = (event)=>{
-
+  const sendMessages = event => {
     event.preventDefault();
-    console.log(message);
-    
-    if(message){
-        console.log("if ran");
-        
-        socket.emit("sendMessage",message,()=> setMessage(""))
+    // console.log(message);
+
+    if (message) {
+      // console.log("if ran");
+
+      socket.emit("sendMessage", message, () => setMessage(""));
     }
+  };
+  //   console.log("TCL: message", message)
+  console.log("TCL: messages", messages);
 
-  }
-//   console.log("TCL: message", message)
-  console.log("TCL: messages", messages)
-
-
-  
   return (
-    <div className="">
-      <div className="">
-        <input
-          value={message}
-          onChange={event => setMessage(event.target.value)}
-          onKeyPress={(event)=>event.key==="Enter" ? sendMessages(event):null}
+    <div className="outerContainer">
+      <div className="container">
+        <Infobar room={room} />
+
+        <Messages messages={messages} name={name} />
+
+        <Input
+          message={message}
+          setMessage={setMessage}
+          sendMessages={sendMessages}
         />
       </div>
     </div>

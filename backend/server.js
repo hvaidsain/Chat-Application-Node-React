@@ -14,9 +14,13 @@ const io = socketio(server);
 app.use(cors());
 app.use(router);
 
+
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
+
+    console.log(`${user.name} joined the room`);
+    
 
     if(error) return callback(error);
 
@@ -39,7 +43,13 @@ io.on('connect', (socket) => {
   });
 
   socket.on('disconnect', () => {
+
+    console.log("diconnect called");
+    
     const user = removeUser(socket.id);
+
+    console.log(`${user.name} left the room`);
+    
 
     if(user) {
       io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });

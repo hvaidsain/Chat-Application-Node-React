@@ -1,0 +1,48 @@
+.outerContainer {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#e3f2fd;
+    height: 100vh;
+    /* width: 100vw; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    margin: 0;
+    padding: 0;
+    background:#ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    height: 65%;
+    width: 35%;
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+    .container{
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 1200px){
+    .container{
+        width: 60%;
+    }
+}
+@media (min-width: 1200px){
+    .container{
+        width: 50%;
+    }
+}
+@media (max-width: 320px){
+    .container{
+        height: 100%;
+        width: 100%;
+    }
+}
+
