@@ -14,9 +14,11 @@
 
 .sendButton {
   width: 20%;
-  color: #ffffff;
+  color: #ffffff !important;
   background: #2962ff;
   border: none;
   text-transform: uppercase;
   padding: 20px;
+  text-decoration: none;
+  display: inline-block;
 }

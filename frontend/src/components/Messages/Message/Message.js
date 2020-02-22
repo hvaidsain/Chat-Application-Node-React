@@ -10,18 +10,18 @@ const Message = ({ message, name }) => {
   let currentUser = trimmedName == user;
 
   return currentUser ? (
-    <div className="messageContainer"> 
-      <p>{trimmedName}</p>
-      <div>
-        <p>{ReactEmoji.emojify(text)}</p>
+    <div className="inuserMessageContainer"> 
+      <p className="displayName">{trimmedName}</p>
+      <div className="intextContainer">
+        <p style={{color:"#ffffff",wordWrap:"break-word"}}>{ReactEmoji.emojify(text)}</p>
       </div>
     </div>
   ) : (
-    <div className="messageContainer"> 
-      <div>
-        <p>{ReactEmoji.emojify(text)}</p>
+    <div className="outuserMessageContainer"> 
+      <div className="outtextContainer">
+        <p style={{color:"#000000",wordWrap:"break-word"}}>{ReactEmoji.emojify(text)}</p>
       </div>
-      <p>{trimmedName}</p>
+      <p className="displayName">{user}</p>
     </div>
   );
 };

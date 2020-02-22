@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom"
 import "./Join.css";
+import chatImage from "../../icons/chat.png"
 
 const Join = () => {
   const [name, setName] = useState("");
@@ -18,6 +19,7 @@ const Join = () => {
   return (
     <div className="Container">
       <div className="innerContainer">
+      <img className="chatImage" src={chatImage} />
         <h2>Just-Talk</h2>
         <input
           type="text"

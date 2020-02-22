@@ -34,7 +34,7 @@ const Chat = ({ location }) => {
   }, [URL, location.search]);
 
   useEffect(() => {
-    console.log("useefect called");
+    // console.log("useefect called");
 
     // console.log(socket);
 
@@ -61,7 +61,7 @@ const Chat = ({ location }) => {
     }
   };
   //   console.log("TCL: message", message)
-  console.log("TCL: messages", messages);
+  // console.log("TCL: messages", messages);
 
   return (
     <div className="outerContainer">

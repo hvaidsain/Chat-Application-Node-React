@@ -63,3 +63,7 @@
 .innerContainer button:hover{
     background: #2ecc71;
 }
+.chatImage{
+    width: 25%;
+    height: auto;
+}
