@@ -7,6 +7,12 @@ import Input from "../Input/Input";
 import Messages from "../Messages/Messages";
 
 let socket;
+let options = {
+  rememberUpgrade:true,
+  transports: ['websocket'],
+  secure:true, 
+  rejectUnauthorized: true
+}
 
 const Chat = ({ location }) => {
   const [name, setName] = useState("");
@@ -19,7 +25,7 @@ const Chat = ({ location }) => {
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
 
-    socket = io(URL);
+    socket = io.connect(URL,options);
 
     setName(name);
     setRoom(room);
